@@ -1,0 +1,4 @@
+# requirements.txt — Contact Management System
+# Install with: pip install -r requirements.txt
+
+flask>=3.0.0
