@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Contact Management System{% endblock %}</title>
+
+    <!-- External CSS stylesheet (static/style.css) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+    <!-- ═══════════════ NAVIGATION BAR ═══════════════ -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <!-- Brand logo -->
+            <a href="{{ url_for('index') }}" class="nav-brand">
+                📒 ContactBook
+            </a>
+
+            <!-- Nav links -->
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">🏠 Home</a></li>
+                <li><a href="{{ url_for('add_contact') }}">➕ Add Contact</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <main class="main-content">
+        <!-- Toast notification container (managed by script.js) -->
+        <div id="toast-container"></div>
+
+        <!-- Child templates render their content here -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        <p>Contact Management System &mdash; SEC035 &bull; B.Tech CSE &bull; SOET &bull; 2025-26</p>
+    </footer>
+
+    <!-- External JavaScript file (static/script.js) -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
