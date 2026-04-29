@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Contact — ContactBook{% endblock %}
+
+{% block content %}
+
+<!-- ══ PAGE HEADER ══ -->
+<div class="page-header">
+    <div class="header-left">
+        <h1>✏️ Edit Contact</h1>
+        <p class="subtitle">Update the details for <strong>{{ contact.name }}</strong>.</p>
+    </div>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">← Back to Contacts</a>
+</div>
+
+<!-- ══ SERVER-SIDE ERROR MESSAGE ══ -->
+{% if error %}
+<div class="alert alert-error">
+    ⚠️ {{ error }}
+</div>
+{% endif %}
+
+<!-- ══ EDIT CONTACT FORM — pre-filled with current values ══ -->
+<div class="form-card">
+    <form action="{{ url_for('edit_contact', contact_id=contact.id) }}"
+          method="POST"
+          id="edit-form"
+          novalidate>
+
+        <!-- Row 1: Name & Phone -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="name">Full Name <span class="required">*</span></label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ contact.name }}"
+                    maxlength="80"
+                    required
+                    autocomplete="off"
+                />
+                <small class="char-counter" id="name-counter">0 / 80</small>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value="{{ contact.phone }}"
+                    maxlength="15"
+                    pattern="[0-9+\-\s]{7,15}"
+                    required
+                    autocomplete="off"
+                />
+                <small class="field-hint">7–15 digits; +, -, spaces allowed</small>
+            </div>
+        </div>
+
+        <!-- Row 2: Email & Address -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ contact.email }}"
+                    maxlength="120"
+                    required
+                    autocomplete="off"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address <span class="optional">(optional)</span></label>
+                <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value="{{ contact.address }}"
+                    maxlength="150"
+                    autocomplete="off"
+                />
+                <small class="char-counter" id="address-counter">0 / 150</small>
+            </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Save Changes</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">✖ Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
